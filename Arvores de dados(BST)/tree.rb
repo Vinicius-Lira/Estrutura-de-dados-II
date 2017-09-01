@@ -31,13 +31,30 @@ def new_node(tree, key)
   tree
 end
 
-tree = nil
-tree = new_node(tree, 5)
-tree = new_node(tree, 7)
-tree = new_node(tree, 4)
-tree = new_node(tree, 6)
+def create_tree(number_node, tree)
+  array = []
+  counter = 1
 
-puts tree.key
-puts tree.left.key
-puts tree.right.key
-puts tree.right.left.key
+  while counter <= 50
+    array << counter
+    counter = counter + 1
+  end
+  counter = 0
+  while counter < number_node
+    key = array.sample
+    puts key
+    tree = new_node(tree, key)
+    array.delete(key)
+    counter = counter + 1
+  end
+
+  tree
+end
+
+# tree = []
+tree = create_tree(5, tree)
+
+puts "Raiz: #{tree.key}"
+if tree.left
+  puts "#{tree.left.key}"
+end
