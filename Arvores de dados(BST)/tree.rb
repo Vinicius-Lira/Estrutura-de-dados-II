@@ -1,36 +1,43 @@
 require_relative 'Node'
 
 def new_node(tree, key)
-  node = Node.new
-  node.key = key
-  if tree
-    loop do
-      if tree.key < key
-        if tree.left == nil
-          tree.left = node
-          tree
-        else
-          tree = tree.left
-        end
-      elsif tree.key > key
-        if tree.right == nil
-          tree.right = node
-          tree
-        else
-          tree = tree.right
-        end
-      end
-    end
+  new_node = Node.new
+  new_node.key = key
+
+  tree_aux = tree
+
+  unless tree_aux
+    return new_node
   else
-    node
+    while true
+        # puts tree_aux.key
+        if tree_aux.key > key
+          unless tree_aux.left
+            tree_aux.left = new_node
+            return tree
+          else
+            tree_aux = tree_aux.left
+          end
+        elsif tree_aux.key < key
+          unless tree_aux.right
+            tree_aux.right = new_node
+            return tree
+          else
+            tree_aux = tree_aux.right
+          end
+        end
+    end
   end
   tree
 end
 
-count = 1
+tree = nil
+tree = new_node(tree, 5)
+tree = new_node(tree, 7)
+tree = new_node(tree, 4)
+tree = new_node(tree, 6)
 
-key = 5
-tree = Node.new
-tree.key = key
-
-new_node tree, 6
+puts tree.key
+puts tree.left.key
+puts tree.right.key
+puts tree.right.left.key
