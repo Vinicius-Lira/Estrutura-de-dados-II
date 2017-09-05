@@ -124,3 +124,5 @@ end
 puts "key delete: " 
 key = gets.to_i
 puts delete(tree, 6)
+
+#fonte codigo delete http://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
