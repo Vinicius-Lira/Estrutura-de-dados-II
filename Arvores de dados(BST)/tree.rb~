@@ -31,11 +31,17 @@ def new_node(tree, key)
   tree
 end
 
+def search(tree, key)
+	while(true)
+		
+	end
+end
+
 def create_tree(number_node, tree)
   array = []
   counter = 1
 
-  while counter <= 50
+  while counter <= number_node
     array << counter
     counter = counter + 1
   end
