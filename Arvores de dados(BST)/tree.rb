@@ -44,7 +44,7 @@ def search(tree, key)
     if tree.key > key
       tree = tree.left
 
-    elsif tree.key <= key  
+    elsif tree.key <= key
 		  tree = tree.right
     end
 	end
@@ -91,6 +91,14 @@ def delete(tree, key)
   return tree
 end
 
+def printOut(tree)
+  if tree
+    printOut tree.left
+    puts tree.key
+    printOut tree.right
+  end
+end
+
 def create_tree(number_node, tree)
   array = []
   counter = 1
@@ -121,8 +129,11 @@ if value != nil
   puts "Search: #{value.key}"
 end
 
-puts "key delete: " 
-key = gets.to_i
-puts delete(tree, 6)
+# puts "key delete: "
+# key = gets.to_i
+# puts delete(tree, key)
+
+printOut tree
+
 
 #fonte codigo delete http://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
