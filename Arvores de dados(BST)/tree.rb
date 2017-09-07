@@ -78,7 +78,7 @@ def delete(tree, key)
     if tree.right == nil
       tree_temp = tree.left
       tree = nil
-      return treem_temp
+      return tree_temp
     end
 
     tree_temp = minValueNode(tree.right)
@@ -103,7 +103,7 @@ def create_tree(number_node, tree)
   array = []
   counter = 1
 
-  while counter <= number_node
+  while counter <= 99
     array << counter
     counter = counter + 1
   end
@@ -119,21 +119,62 @@ def create_tree(number_node, tree)
   tree
 end
 
-tree = create_tree(10, tree)
-
-puts "Raiz: #{tree.key}"
-
-value = search(tree, 6)
-
-if value != nil
-  puts "Search: #{value.key}"
+def create_tree_empty(tree)
+  tree = nil
 end
 
-# puts "key delete: "
-# key = gets.to_i
-# puts delete(tree, key)
+def delete_tree
+  nil
+end
 
-printOut tree
+def main
+  tree = nil
+
+  while true
+    puts "\n1 - create tree"
+    puts "2 - add random keys in tree"
+    puts "3 - add key in tree"
+    puts "4 - delete key the tree"
+    puts "5 - delete tree"
+    puts "6 - print tree"
+    puts "7 - exit"
+    print "Choose an option:"
+    option = gets.to_i
+
+    case option
+    when 1
+      system "clear"
+      tree = create_tree_empty(tree)
+    when 2
+      print "\n size the tree: "
+      size_tree = gets.to_i
+      tree = create_tree(size_tree, tree)
+      system "clear"
+    when 3
+      print "\n key to add: "
+      key = gets.to_i
+      tree = new_node(tree, key)
+      system "clear"
+    when 4
+      print "\n key to delete: "
+      key = gets.to_i
+      tree = delete(tree, key)
+      system "clear"
+    when 5
+      tree = delete_tree
+      system "clear"
+      puts "Success to delete\n\n"
+    when 6
+      system "clear"
+      printOut(tree)
+    when 7
+      system "clear"
+      break
+    end
+  end
+end
+
+main
 
 
 #fonte codigo delete http://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
