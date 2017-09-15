@@ -10,11 +10,11 @@ def new_node(tree, key)
     return new_node
   else
     while true
-        # puts tree_aux.key
         if tree_aux.key > key
           unless tree_aux.left
             tree_aux.left = new_node
             return tree
+            break
           else
             tree_aux = tree_aux.left
           end
@@ -22,6 +22,7 @@ def new_node(tree, key)
           unless tree_aux.right
             tree_aux.right = new_node
             return tree
+            break
           else
             tree_aux = tree_aux.right
           end
@@ -91,11 +92,27 @@ def delete(tree, key)
   return tree
 end
 
-def printOut(tree)
+def preorder(tree)
   if tree
-    printOut tree.left
     puts tree.key
-    printOut tree.right
+    preorder tree.left
+    preorder tree.right
+  end
+end
+
+def inorder(tree)
+  if tree
+    inorder tree.left
+    puts tree.key
+    inorder tree.right
+  end
+end
+
+def postorder(tree)
+  if tree
+    postorder tree.left
+    postorder tree.right
+    puts tree.key
   end
 end
 
@@ -137,7 +154,8 @@ def main
     puts "4 - delete key the tree"
     puts "5 - delete tree"
     puts "6 - print tree"
-    puts "7 - exit"
+    puts "7 - search key"
+    puts "8 - exit"
     print "Choose an option:"
     option = gets.to_i
 
@@ -166,10 +184,37 @@ def main
       puts "Success to delete\n\n"
     when 6
       system "clear"
-      printOut(tree)
-    when 7
+      puts "1 - Pre-order"
+      puts "2 - In-order"
+      puts "3 - Post-order"
+      puts "4 - Root"
+      option = gets.to_i
+      case option
+      when 1
+        system "clear"
+        preorder(tree)
+      when 2
+        system "clear"
+        inorder(tree)
+      when 3
+        system "clear"
+        postorder(tree)
+      when 4
+        system "clear"
+        puts "ROOT: #{tree.key}"
+      end
+    when 8
       system "clear"
       break
+    when 7
+      system "clear"
+      print "key for search: "
+      key = gets.to_i
+      if search(tree,key)
+        puts "key exists"
+      else
+        puts "key does not exist"
+      end
     end
   end
 end
@@ -177,4 +222,4 @@ end
 main
 
 
-#fonte codigo delete http://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
+#base fonte codigo delete http://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
