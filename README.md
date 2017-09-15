@@ -2,6 +2,8 @@
 
 BST - Binary search tree programing in language ruby.
 
+RBT - Red Black Tree programing in language ruby.
+
 Commands to install programing language ruby in ambient linux:
 
 digit in terminal:

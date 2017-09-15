@@ -1,0 +1,7 @@
+Red Black tree
+
+- Todo nó é vermelho ou preto.
+- A raiz sempre é preta.
+- Todo nó folha é preto.
+- Se um node é vermelho então os filhos dele são pretos.
+- Para todos os caminhos da raiz até uma filha a quantidade de nós pretos é igual.
