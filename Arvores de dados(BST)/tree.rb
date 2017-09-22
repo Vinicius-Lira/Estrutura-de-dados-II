@@ -120,7 +120,7 @@ def create_tree(number_node, tree)
   array = []
   counter = 1
 
-  while counter <= number_node
+  while counter <= number_node*3
     array << counter
     counter = counter + 1
   end
