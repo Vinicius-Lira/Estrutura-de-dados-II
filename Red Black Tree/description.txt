@@ -5,3 +5,11 @@ Red Black tree
 - Todo nó folha é preto.
 - Se um node é vermelho então os filhos dele são pretos.
 - Para todos os caminhos da raiz até uma filha a quantidade de nós pretos é igual.
+
+Deletear nodos
+- Um nodo vermelho tem apenas filhos pretos.
+- O caminho da raiz nova qualquer folha tem a mesma quantidade de  nodos pretos.
+- A raiz é preta.
+- Trasforma no caso em que o nodo tem apenas um nodo não nulo.
+- Se o nodo for vermelho, ou seu filho é vermelho, substitui.
+- Senão, se o nodo for preto 6 casos.	
