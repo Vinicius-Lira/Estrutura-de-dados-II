@@ -10,7 +10,7 @@ def new_node(tree, key)
 
   new_nil = Node.new
 
-  puts "NEW NODE"
+  # puts "NEW NODE"
 
   tree_aux = tree
   if tree_aux == nil
@@ -19,42 +19,31 @@ def new_node(tree, key)
   else
     if key < tree_aux.key
       if tree_aux.left == nil
-        if tree_aux.color == RED
-          new_Node.color = BLACK
-        else
-          new_Node.color = RED
-        end
+        tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
         tree_aux.left = new_Node
       else
         tree_aux = new_node(tree_aux.left, key)
-        # tree_aux.left = new_nil
+        
       end
     elsif key > tree_aux.key
       if tree_aux.right == nil
-        if tree_aux.color == RED
-          new_Node.color = BLACK
-        else
-          new_Node.color = RED
-        end
+        tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
         tree_aux.right = new_Node
       else
         tree_aux = new_node(tree_aux.right, key)
-        # tree_aux.right = new_nil
+        
       end
     end
   end 
   tree
 end
 
-def rotateRight(node_h)
-	x = node_h.left
-	node_h.left = x.right
-	x.right = node_h
-	x.color = h.color
-	h.color = "RED"
-	x.number_subnodes = node_h. number_subnodes
-	node_h.number_subnodes = 1 + size(h.left) + size(h.right)
-	x
+def preorder(tree)
+  if tree
+    puts tree.key
+    preorder tree.left
+    preorder tree.right
+  end
 end
 
 tree = nil
@@ -69,6 +58,8 @@ tree = new_node(tree, 6)
 tree = new_node(tree, 22)
 tree = new_node(tree, 27)
 
-puts tree.key
-puts tree.left.key
-puts tree.right.key
+preorder(tree)
+puts
+puts tree.key,tree.color
+puts tree.left.key,tree.left.color
+puts tree.right.key,tree.right.color

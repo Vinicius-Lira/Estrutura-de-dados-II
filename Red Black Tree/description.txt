@@ -13,3 +13,6 @@ Deletear nodos
 - Trasforma no caso em que o nodo tem apenas um nodo não nulo.
 - Se o nodo for vermelho, ou seu filho é vermelho, substitui.
 - Senão, se o nodo for preto 6 casos.	
+
+
+Fonte: https://pt.wikibooks.org/wiki/Algoritmos_e_Estruturas_de_Dados/%C3%81rvores_Rubro-Negras
