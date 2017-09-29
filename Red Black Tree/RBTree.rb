@@ -10,7 +10,6 @@ def new_node(tree, key)
 
   new_nil = Node.new
 
-  # puts "NEW NODE"
 
   tree_aux = tree
   if tree_aux == nil
@@ -34,8 +33,26 @@ def new_node(tree, key)
         
       end
     end
-  end 
+  end
   tree
+end
+
+def verifica_casos_insercao(tree)
+  if tree.left == nil && tree.right != nil
+    tree.left = tree
+    new_tree = tree.right
+    tree.right = nil
+
+    return new_tree
+  end
+
+  if tree.left != nil && tree.left.left != nil
+    tree.left.right = tree
+    new_tree = tree.left
+    tree.left = nil
+    return new_tree
+  end
+
 end
 
 def preorder(tree)
