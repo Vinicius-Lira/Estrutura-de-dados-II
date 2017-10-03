@@ -7,9 +7,7 @@ BLACK = "BLACK"
 def new_node(tree, key)
   new_Node = Node.new
   new_Node.key = key
-
   new_nil = Node.new
-
 
   tree_aux = tree
   if tree_aux == nil
@@ -18,41 +16,75 @@ def new_node(tree, key)
   else
     if key < tree_aux.key
       if tree_aux.left == nil
+        # tree_aux = verifica_casos_insercao(tree_aux)
         tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
         tree_aux.left = new_Node
       else
         tree_aux = new_node(tree_aux.left, key)
-        
       end
     elsif key > tree_aux.key
       if tree_aux.right == nil
+        # tree_aux = verifica_casos_insercao(tree_aux)
         tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
         tree_aux.right = new_Node
       else
         tree_aux = new_node(tree_aux.right, key)
-        
       end
     end
   end
   tree
 end
 
+def rotate_left(tree)
+  root_key = tree.right.key
+  left_key = tree.key
+  tree.right.right ? right_key = tree.right.right.key : right_key = nil
+
+  new_tree = nil
+  new_tree = new_node(new_tree, root_key)
+  new_tree = new_node(new_tree, left_key)
+  new_tree = new_node(new_tree, right_key)
+
+  return new_tree
+end
+
+def rotate_right(tree)
+  root_key = tree.left.key
+  tree.left.left ? left_key = tree.left.left.key : left_key.key = nil
+  right_key = tree.key
+
+  new_tree = nil
+  new_tree = new_node(new_tree, root_key)
+  new_tree = new_node(new_tree, left_key)
+  new_tree = new_node(new_tree, right_key)
+
+  return new_tree
+end
+
 def verifica_casos_insercao(tree)
+  # if tree.left != nil && tree.right == nil
+  # end
   if tree.left == nil && tree.right != nil
-    tree.left = tree
-    new_tree = tree.right
-    tree.right = nil
-
-    return new_tree
+    tree = rotate_left(tree)
+    return tree
   end
 
-  if tree.left != nil && tree.left.left != nil
-    tree.left.right = tree
-    new_tree = tree.left
-    tree.left = nil
-    return new_tree
+  if tree.right == nil && tree.left != nil && tree.left.left
+    tree = rotate_right(tree)
+    return tree
   end
 
+  return tree
+end
+
+def minValueNode(tree)
+  currentNode = tree
+
+  while currentNode.left != nil
+    currentNode = currentNode.left
+  end
+
+  return currentNode
 end
 
 def preorder(tree)
@@ -63,20 +95,33 @@ def preorder(tree)
   end
 end
 
-tree = nil
-tree = new_node(tree, 13)
-tree = new_node(tree, 8)
-tree = new_node(tree, 17)
-tree = new_node(tree, 1)
-tree = new_node(tree, 15)
-tree = new_node(tree, 11)
-tree = new_node(tree, 25)
-tree = new_node(tree, 6)
-tree = new_node(tree, 22)
-tree = new_node(tree, 27)
+def inorder(tree)
+  if tree
+    inorder tree.left
+    puts tree.key
+    inorder tree.right
+  end
+end
 
+def postorder(tree)
+  if tree
+    postorder tree.left
+    postorder tree.right
+    puts tree.key
+  end
+end
+
+tree = nil
+tree = new_node(tree, 8)
+tree = new_node(tree, 10)
+tree = new_node(tree, 23)
+tree = new_node(tree, 6)
+tree = new_node(tree, 9)
+tree = new_node(tree, 0)
+tree = new_node(tree, 12)
+tree = new_node(tree, 35)
+tree = new_node(tree, 24)
+tree = new_node(tree, 15)
+tree = new_node(tree, 3)
 preorder(tree)
-puts
-puts tree.key,tree.color
-puts tree.left.key,tree.left.color
-puts tree.right.key,tree.right.color
+# inorder(tree)
