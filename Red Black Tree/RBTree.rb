@@ -16,7 +16,6 @@ def new_node(tree, key)
   else
     if key < tree_aux.key
       if tree_aux.left == nil
-        # tree_aux = verifica_casos_insercao(tree_aux)
         tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
         tree_aux.left = new_Node
       else
@@ -24,7 +23,6 @@ def new_node(tree, key)
       end
     elsif key > tree_aux.key
       if tree_aux.right == nil
-        # tree_aux = verifica_casos_insercao(tree_aux)
         tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
         tree_aux.right = new_Node
       else
@@ -62,8 +60,6 @@ def rotate_right(tree)
 end
 
 def verifica_casos_insercao(tree)
-  # if tree.left != nil && tree.right == nil
-  # end
   if tree.left == nil && tree.right != nil
     tree = rotate_left(tree)
     return tree
