@@ -9,7 +9,7 @@ def new_tree
   t.root.left = nil
   t.root.right = nil
   t.root.parent = nil
-  t.root.key = 0
+  # t.root.key = 1
   t
 end
 
@@ -67,7 +67,7 @@ def insert( t, k)
   n = Node.new
   n.left = t.nill
   n.right = t.nill
-  # n.parent = t.nill
+  n.parent = t.nill
   n.color = RED
   n.key = k
 

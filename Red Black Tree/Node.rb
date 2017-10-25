@@ -4,7 +4,8 @@ class Node
   def initialize
     @left = nil
     @right = nil
+    @parent = nil
     @color = false
-    @key = nil
+    @key = 0
   end
 end
