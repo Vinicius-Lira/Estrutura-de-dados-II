@@ -6,11 +6,57 @@ BLACK = true
 
 def new_tree
   t = Tree.new
-  t.root.left = nil
-  t.root.right = nil
-  t.root.parent = nil
-  # t.root.key = 1
+  t.nill = Node.new
+  t.nill.color = BLACK
+  t.root = t.nill
   t
+end
+
+def rotate_left( t, node_x)
+  node_y = Node.new
+  node_y = node_x.right
+
+  node_x.right = node_y.left
+
+  if(node_y.left != t.nill)
+    node_y.left.parent = node_x
+  end
+
+  node_y.parent = node_x.parent
+
+  if node_x.parent == t.nill
+    t.root = node_y
+  elsif node_x == node_x.parent.left
+    node_x.parent.left = node_y
+  else
+    node_x.parent.right = node_y
+  end
+
+  node_y.left = node_x
+  node_x.parent = node_y
+end
+
+def rotate_right( t, node_x)
+  node_y = node_x.left
+
+  node_x.left = node_y.right
+
+  if node_y.right != t.nill
+    node_y.right.parent = node_x
+  end
+
+  node_y.parent = node_x.ṕarent
+
+  if node_x.parent == t.nill
+    t.root = node_y
+  elsif node_x == node_x.parent.left
+    node_x.parent.left = node_y
+  else
+    node_x.parent.right = node_y
+  end
+
+  node_y.right = node_x
+  node_x.parent = node_y
 end
 
 def Fixup(t, k)
@@ -65,18 +111,17 @@ end
 
 def insert( t, k)
   n = Node.new
-  n.left = t.nill
-  n.right = t.nill
-  n.parent = t.nill
-  n.color = RED
+  n.parent = n.left = n.right = t.nill
   n.key = k
+  n.color = RED
 
   ant = t.nill
+  x = Node.new
   x = t.root
 
   while x != t.nill
     ant = x
-    if k < x.key
+    if (k < x.key)
       x = x.left
     else
       x = x.right
@@ -94,53 +139,6 @@ def insert( t, k)
   end
 
   Fixup(t, n)
-end
-
-def rotate_left( t, node_x)
-  node_y = Node.new
-  node_y = node_x.right
-
-  node_x.right = node_y.left
-
-  if(node_y != t.nill)
-    node_y.left.parent = node_x
-  end
-
-  node_y.parent = node_x.parent
-
-  if node_x.parent == t.nill
-    t.root = node_y
-  elsif node_x == node_x.parent.left
-    node_x.parent.left = node_y
-  else
-    node_x.parent.right = node_y
-  end
-
-  node_y.left = node_x
-  node_x.parent = node_y
-end
-
-def rotate_right( t, node_x)
-  node_y = node_x.left
-
-  node_x.left = node_y.right
-
-  if node.right != t.nill
-    node_y.right.parent = node_x
-  end
-
-  node_y.parent = node_x.ṕarent
-
-  if node_x.parent == t.nill
-    t.root = node_y
-  elsif node_x = node_x.parent.left
-    node_x.parent.left = node_y
-  else
-    node_x.parent.right = node_y
-  end
-
-  node_y.right = node_x
-  node_x.parent = node_y
 end
 
 def drawTree(t, n, h)
@@ -202,11 +200,10 @@ def main
   t = new_tree
   d = 0
 
-  # d = gets.to_i
-  insert(t, 5)
   insert(t, 10)
+  insert(t, 5)
   insert(t, 20)
-  insert(t, 49)
+  # insert(t, 49)
 
   drawTree(t, t.root, 0)
 end
