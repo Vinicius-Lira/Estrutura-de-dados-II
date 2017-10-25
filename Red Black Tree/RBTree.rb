@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative 'Node'
 require_relative 'Tree'
 
@@ -199,11 +201,15 @@ end
 def main
   t = new_tree
   d = 0
-
-  insert(t, 10)
-  insert(t, 5)
-  insert(t, 20)
-  # insert(t, 49)
+  print "Quantidades de nodos: "
+  d = gets.to_i
+  i = 0
+  while i < d
+    print "key: "
+    key = gets.to_i
+    insert(t, key)
+    i = i + 1
+  end
 
   drawTree(t, t.root, 0)
 end
