@@ -1,11 +1,10 @@
 class Node
-  attr_accessor :left, :right, :key, :color, :number_subnodes
+  attr_accessor :left, :right, :parent, :key, :color
 
-  @key = nil
-end
-
-class NodeNil
-	attr_accessor :key
-
-	@key = nil
+  def initialize
+    @left = nil
+    @right = nil
+    @color = false
+    @key = nil
+  end
 end

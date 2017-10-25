@@ -1,11 +1,11 @@
 class Node
   attr_accessor :left, :right, :parent, :color, :key
 
-  @key = 0
-  @color = false
-end
-
-class Rbtree
-  root = Node.new
-  nill = Node.new
+  def initialize
+    @left = nil
+    @right = nil
+    @parent = nil
+    @color = false
+    @key = 0
+  end
 end

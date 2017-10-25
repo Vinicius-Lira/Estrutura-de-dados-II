@@ -1,76 +1,167 @@
 require_relative 'Node'
+require_relative 'Tree'
 
-RED = "RED"
-BLACK = "BLACK"
+RED = false
+BLACK = true
 
+def new_tree
+  t = Tree.new
+  t.root.left = nil
+  t.root.right = nil
+  t.root.parent = nil
+  t.root.key = 0
+  t
+end
 
-def new_node(tree, key)
-  new_Node = Node.new
-  new_Node.key = key
-  new_nil = Node.new
-
-  tree_aux = tree
-  if tree_aux == nil
-    new_Node.color = BLACK
-    return new_Node
-  else
-    if key < tree_aux.key
-      if tree_aux.left == nil
-        tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
-        tree_aux.left = new_Node
+def Fixup(t, k)
+  while (k != t.root) && (k.parent.color == RED)
+    #caso avô seja filho a esquerda
+    if k.parent == k.parent.parent.left
+      l = k.parent.parent.right #tio
+      #caso 1 -- tio vermelho
+      if l.color == RED
+        l.color = BLACK
+        k.parent.color = BLACK
+        k.parent.parent.color = RED
+        k = k.parent.parent
       else
-        tree_aux = new_node(tree_aux.left, key)
+        #caso 2 -- o tio é preto e k é filho à direita: transforma no caso 3
+        if k == k.parent.right
+          k = k.parent
+          rotate_left(t, k)
+        end
+
+        #caso 3 -- o tio é preto e k é filho a esquerda: rotaciona e termina
+        k.parent.color = BLACK
+        k.parent.parent.color = RED
+        rotate_right(t, k.parent.parent)
       end
-    elsif key > tree_aux.key
-      if tree_aux.right == nil
-        tree_aux.color == RED ? new_Node.color = BLACK : new_Node.color = RED
-        tree_aux.right = new_Node
+    else
+      #caso avô seja filho à direita
+      l = k.parent.parent.left #tio
+
+      #caso 1 -- o tio é vermelho
+      if l.color == RED
+        l.color = BLACK
+        k.parent.color = BLACK
+        k.parent.parent.color = RED
+        k = k.parent.parent #sobe o problema para o avô de k
       else
-        tree_aux = new_node(tree_aux.right, key)
+        #caso 2 -- o tio é preto e k é filho à direita: transforma no caso 3
+        if k == k.parent.left
+          k = k.parent
+          rotate_right(t, k)
+        end
+        #caso 3 -- o tio é preto e k é filho à esquerda: rotaciona e termina
+        k.parent.color = BLACK
+        k.parent.parent.color = RED
+        rotate_left(t, k.parent.parent)
       end
     end
   end
-  tree
+
+  t.root.color = BLACK
 end
 
-def rotate_left(tree)
-  root_key = tree.right.key
-  left_key = tree.key
-  tree.right.right ? right_key = tree.right.right.key : right_key = nil
+def insert( t, k)
+  n = Node.new
+  n.left = t.nill
+  n.right = t.nill
+  # n.parent = t.nill
+  n.color = RED
+  n.key = k
 
-  new_tree = nil
-  new_tree = new_node(new_tree, root_key)
-  new_tree = new_node(new_tree, left_key)
-  new_tree = new_node(new_tree, right_key)
+  ant = t.nill
+  x = t.root
 
-  return new_tree
-end
-
-def rotate_right(tree)
-  root_key = tree.left.key
-  tree.left.left ? left_key = tree.left.left.key : left_key.key = nil
-  right_key = tree.key
-
-  new_tree = nil
-  new_tree = new_node(new_tree, root_key)
-  new_tree = new_node(new_tree, left_key)
-  new_tree = new_node(new_tree, right_key)
-
-  return new_tree
-end
-
-def verifica_casos_insercao(tree)
-  if tree.left == nil && tree.right != nil
-    tree = rotate_left(tree)
-    return tree
+  while x != t.nill
+    ant = x
+    if k < x.key
+      x = x.left
+    else
+      x = x.right
+    end
   end
 
-  if tree.right == nil && tree.left != nil && tree.left.left
-    tree = rotate_right(tree)
-    return tree
+  n.parent = ant
+
+  if ant == t.nill
+    t.root = n
+  elsif k < ant.key
+    ant.left = n
+  else
+    ant.right = n
   end
 
-  return tree
+  Fixup(t, n)
+end
+
+def rotate_left( t, node_x)
+  node_y = Node.new
+  node_y = node_x.right
+
+  node_x.right = node_y.left
+
+  if(node_y != t.nill)
+    node_y.left.parent = node_x
+  end
+
+  node_y.parent = node_x.parent
+
+  if node_x.parent == t.nill
+    t.root = node_y
+  elsif node_x == node_x.parent.left
+    node_x.parent.left = node_y
+  else
+    node_x.parent.right = node_y
+  end
+
+  node_y.left = node_x
+  node_x.parent = node_y
+end
+
+def rotate_right( t, node_x)
+  node_y = node_x.left
+
+  node_x.left = node_y.right
+
+  if node.right != t.nill
+    node_y.right.parent = node_x
+  end
+
+  node_y.parent = node_x.ṕarent
+
+  if node_x.parent == t.nill
+    t.root = node_y
+  elsif node_x = node_x.parent.left
+    node_x.parent.left = node_y
+  else
+    node_x.parent.right = node_y
+  end
+
+  node_y.right = node_x
+  node_x.parent = node_y
+end
+
+def drawTree(t, n, h)
+  if n.left != t.nill
+    drawTree(t, n.left, h + 1)
+  end
+  i = 0
+  while i < h
+    print("    ")
+    i = i + 1
+  end
+
+  if n.color == RED
+    puts "R-#{n.key}"
+  else
+    puts "B-#{n.key}"
+  end
+
+  if n.right != t.nill
+    drawTree(t, n.right, h + 1)
+  end
 end
 
 def minValueNode(tree)
@@ -107,17 +198,17 @@ def postorder(tree)
   end
 end
 
-tree = nil
-tree = new_node(tree, 8)
-tree = new_node(tree, 10)
-tree = new_node(tree, 23)
-tree = new_node(tree, 6)
-tree = new_node(tree, 9)
-tree = new_node(tree, 0)
-tree = new_node(tree, 12)
-tree = new_node(tree, 35)
-tree = new_node(tree, 24)
-tree = new_node(tree, 15)
-tree = new_node(tree, 3)
-preorder(tree)
-# inorder(tree)
+def main
+  t = new_tree
+  d = 0
+
+  # d = gets.to_i
+  insert(t, 5)
+  insert(t, 10)
+  insert(t, 20)
+  insert(t, 49)
+
+  drawTree(t, t.root, 0)
+end
+
+main
