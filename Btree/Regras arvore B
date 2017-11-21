@@ -1,0 +1,9 @@
+- Cada nó da arvore deve ter pelo menos 50% de ocupação(ordem da arvore)
+- O número de filhos (exceto folha) deve ser o número de chaves + 1
+- Todas as folhas estão no mesmo nível( o crescimento é para cima)
+
+
+Inserção
+  - Se o elemento couber na página, basta inclui-lo de forma ordenada.
+  - Se não couber, a página deve ser dividida em duas e o elemento do meio
+   deve ser promovido.
