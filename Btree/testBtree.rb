@@ -17,3 +17,4 @@ puts tree.tree.page[0].key
 puts tree.tree.page[1].key
 puts tree.tree.page[2].key
 puts tree.tree.page[3].key
+puts "4: '#{tree.tree.page[4].key}'"
