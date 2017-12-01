@@ -7,3 +7,4 @@ Inserção
   - Se o elemento couber na página, basta inclui-lo de forma ordenada.
   - Se não couber, a página deve ser dividida em duas e o elemento do meio
    deve ser promovido.
+  - O número máximo de chaves no nodo(página) é a ordem(T) * 2 - 1 : numero_maximo = (T * 2) - 1

@@ -44,4 +44,12 @@ class NodeB
     end
   end
 
+  def print_node(node)
+    i = 0
+    while i < counter_keys_node
+      puts page[i].key
+      i = i + 1
+    end
+  end
+
 end
